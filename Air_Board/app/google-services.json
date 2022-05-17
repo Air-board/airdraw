@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "859210630579",
+    "project_id": "air-board-897a0",
+    "storage_bucket": "air-board-897a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:859210630579:android:71d3f731d5bb5d2aeef7c6",
+        "android_client_info": {
+          "package_name": "com.example.airboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "859210630579-9i0dbt04o28uchaepale3ad4bvq4s2sc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTxDmGFP4S5Kp4y-14LoaRM3hoxjZ7FyM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "859210630579-9i0dbt04o28uchaepale3ad4bvq4s2sc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
