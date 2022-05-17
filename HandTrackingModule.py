@@ -1,6 +1,5 @@
 import cv2
 import mediapipe as mp
-import time
 
 class handDetector():
     def __init__(self,mode=False,maxHands=2,modelComplexity=1,detectionCon=0.5,trackingCon=0.5):
@@ -32,7 +31,7 @@ class handDetector():
             myHand=self.results.multi_hand_landmarks[handNo]
             for id, lm in enumerate(myHand.landmark):
                 # print(id,lm)
-                h, w, c = img.shape
+                h, w, c = img.shape                             # height width and shape
                 cx, cy = int(lm.x * w), int(lm.y * h)
                 self.lmlist.append([id,cx,cy])
                 if draw:
@@ -56,28 +55,6 @@ class handDetector():
             else:
                 fingers.append(0)
         return fingers
-
-def main():
-    pTime = 0
-    cTime = 0
-    cap = cv2.VideoCapture(0)
-    detector = handDetector()
-    while True:
-        success, img = cap.read()
-        img = detector.findHands(img,draw=False)
-        lmlist = detector.findPosition(img)
-        if len(lmlist) != 0:
-            print(lmlist[8])
-
-        cTime = time.time()
-        fps = 1 / (cTime - pTime)
-        pTime = cTime
-
-        cv2.putText(img, f'FPS:{int(fps)}', (10, 40), cv2.FONT_HERSHEY_PLAIN, 2, (0, 0, 255), 3)
-        cv2.imshow("Video", img)
-        cv2.waitKey(1)
-
-
 
 if __name__ == "__main__":
     main()
