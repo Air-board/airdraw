@@ -55,6 +55,3 @@ class handDetector():
             else:
                 fingers.append(0)
         return fingers
-
-if __name__ == "__main__":
-    main()
