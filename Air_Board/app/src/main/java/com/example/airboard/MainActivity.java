@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.ar.core.Anchor;
+import com.google.ar.core.Pose;
+import com.google.ar.core.Session;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.assets.RenderableSource;
 import com.google.ar.sceneform.math.Vector3;
@@ -40,7 +43,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    Vector3 pos; int size = 0;
+    Vector3 pos; int size = 0;List<Character> text = new ArrayList<>();
     FirebaseStorage storage;
     FirebaseAuth mAuth;
     @Override
@@ -74,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         StorageReference pred_text = storage.getReference().child("predicted_text.txt");
 
 
-        List<Character> text = new ArrayList<>();
+
         try {
 
             File file = File.createTempFile("predicted_text","txt");
@@ -86,11 +89,12 @@ public class MainActivity extends AppCompatActivity {
                     try{
                         FileReader fr = new FileReader(file);
                         int content; int i=0;
+                        String test = "xidhu";
+
                         while ((content = fr.read()) != -1) {
                             text.add(Character.toLowerCase(((char) content)));
                         }
                         try {
-                            System.out.println(text);
                             final Map<Character, File> models = new HashMap<>();
                             for(int l=0;l<text.size();l++)
                             {
@@ -109,6 +113,10 @@ public class MainActivity extends AppCompatActivity {
                                             {
 
                                                 File model = models.get(text.get(index));
+                                                for(int i = 0 ; i < text.size();i++){
+                                                    renderable.add(null);
+                                                }
+
                                                 buildModel(model);
                                             }
                                         }
@@ -137,17 +145,19 @@ public class MainActivity extends AppCompatActivity {
 
 
         arFragment.setOnTapArPlaneListener((hitResult, plane, motionEvent) -> {
+            float[] position = { 0, 0, -0.75f };       // 75 cm away from camera
+            float[] rotation = { 0, 0, 0, 0 };
             for (int i = 0; i < text.size(); i++) {
-                AnchorNode anchorNode = new AnchorNode(hitResult.createAnchor());
-                anchorNode.setRenderable(renderable.removeFirst());
-                if (size == 0)
-                    pos = anchorNode.getWorldPosition();
-                else
-                    pos.x += 1000;
-                anchorNode.setLocalPosition(pos);
-                arFragment.getArSceneView().getScene().addChild(anchorNode);
-                pos = anchorNode.getRight();
-                size += 1;
+                Session session = arFragment.getArSceneView().getSession();
+
+                position[0] += 0.25f;
+
+                Anchor anchor =  session.createAnchor(new Pose(position, rotation));
+
+                AnchorNode anchorNode = new AnchorNode(anchor);
+                anchorNode.setRenderable(renderable.get(i));
+                anchorNode.setParent(arFragment.getArSceneView().getScene());
+
             }
         });
     }
@@ -168,7 +178,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private LinkedList<ModelRenderable> renderable = new LinkedList<ModelRenderable>();
+     LinkedList<ModelRenderable> renderable = new LinkedList<>();
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     private void buildModel(File file) {
@@ -186,9 +197,19 @@ public class MainActivity extends AppCompatActivity {
                 .setRegistryId(file.getPath())
                 .build()
                 .thenAccept(modelRenderable -> {
-                    Toast.makeText(this,"Model Built", Toast.LENGTH_SHORT).show();
 
-                    renderable.add(modelRenderable);
+                    for(int i = 0; i < text.size();i++){
+                        Character ch = file.getPath().substring(40,41).charAt(0);
+                        if(ch == text.get(i)){
+                            Toast.makeText(this,"Model Built "+ch, Toast.LENGTH_SHORT).show();
+                            renderable.set(i,modelRenderable);
+                        }
+                    }
+
+
+
+
+
                 });
 
     }
