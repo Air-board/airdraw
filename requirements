@@ -1,0 +1,8 @@
+opencv-python=4.5.5.64
+mediapipe=0.8.9.1
+numpy=1.21.5
+protobuf=3.19.4
+pywin32=304
+tensorflow=2.8.0
+path=16.4.0
+pyrebase5=5.0.1
