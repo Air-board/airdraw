@@ -30,4 +30,5 @@ Developed AR application which would read the text from Firebase and project the
 ![image](https://user-images.githubusercontent.com/53861812/172015762-153fcb80-72a5-4590-b78e-07f38d4389d3.png)
 
 
-To run the program, clone the entire repository. Install the packages in requirements.txt and run 
+# Program Execution
+To run the program, clone the entire repository. Install the packages in requirements.txt and run air_draw.py. Use the index finger to draw, index and middle finger to erase and open palm to clear any drawings. Use the pinky finger (finger up) only to send the drawn text to the deep learning model and predict the text. The predicted text is uploaded into Firebase from where the AR application loads the text.
