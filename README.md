@@ -36,3 +36,7 @@ To run the program, clone the entire repository. Install the packages in require
 
 The directory Air_Board is for the AR application. No need of this directory for writing and prediction purposes.
 The directory model contains the snapshots of the trained model with which the text is predicted upon.
+
+In firebase_uploader.py, use your own Firebase storage bucket and apiKey. Also create a new serviceAccountKey.json file for the private keys and other related information. Refer the video below for more information
+
+[![Watch the video](https://i.ytimg.com/an_webp/gLyaR3KPYt4/mqdefault_6s.webp?du=3000&sqp=CNCugZYG&rs=AOn4CLDY4abUCT-B_vUh4XkxOzJjqBtRdA)](https://www.youtube.com/watch?v=gLyaR3KPYt4)
