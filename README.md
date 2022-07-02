@@ -28,3 +28,6 @@ Developed AR application which would read the text from Firebase and project the
 ![image](https://user-images.githubusercontent.com/53861812/172015770-13932b8c-3df2-4039-be05-903a36c98be0.png)
 
 ![image](https://user-images.githubusercontent.com/53861812/172015762-153fcb80-72a5-4590-b78e-07f38d4389d3.png)
+
+
+To run the program, clone the entire repository. Install the packages in requirements.txt and run 
